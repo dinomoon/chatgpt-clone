@@ -1,21 +1,31 @@
 'use client';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useActionState, useEffect } from 'react';
 import { useFormValidate } from '../../../hooks/useFormValidate';
 import { SignUpSchema } from '../../../schemas/auth';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import FormCard from './FormCard';
 import Submit from './Submit';
-import { FormError } from '../../../types/form';
+import { SignUpFormError } from '../../../types/form';
 import FormMessage from './FormMessage';
+import { signUp } from '../../../actions/signup';
+import toast from 'react-hot-toast';
 
 export default function SignUpForm() {
-  const { errors, validateField } = useFormValidate<FormError>(SignUpSchema);
+  const [error, action] = useActionState(signUp, undefined);
+  const { errors, validateField } =
+    useFormValidate<SignUpFormError>(SignUpSchema);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     validateField(name, value);
   };
+
+  useEffect(() => {
+    if (error?.errorMessage) {
+      toast.error(error.errorMessage);
+    }
+  }, [error]);
 
   return (
     <>
@@ -23,7 +33,7 @@ export default function SignUpForm() {
         title='회원가입'
         footer={{ label: '이미 계정이 있으신가요?', href: '/login' }}
       >
-        <form className='space-y-6'>
+        <form action={action} className='space-y-6'>
           <div className='space-y-1'>
             <Label htmlFor='name'>이름</Label>
             <Input

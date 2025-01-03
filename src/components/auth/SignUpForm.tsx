@@ -1,14 +1,14 @@
 'use client';
 import { ChangeEvent, useActionState, useEffect } from 'react';
-import { useFormValidate } from '../../../hooks/useFormValidate';
-import { SignUpSchema } from '../../../schemas/auth';
+import { useFormValidate } from '@/hooks/useFormValidate';
+import { SignUpSchema } from '@/schemas/auth';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import FormCard from './FormCard';
 import Submit from './Submit';
-import { SignUpFormError } from '../../../types/form';
+import { SignUpFormError } from '@/types/form';
 import FormMessage from './FormMessage';
-import { signUp } from '../../../actions/signup';
+import { signUp } from '@/actions/signup';
 import toast from 'react-hot-toast';
 
 export default function SignUpForm() {

@@ -1,8 +1,8 @@
 'use server';
 import { redirect } from 'next/navigation';
 import { getUserByEmail } from '../data/user';
-import db from '../db';
-import { usersTable } from '../db/schema';
+import db from '../../db';
+import { usersTable } from '../../db/schema';
 import { SignUpSchema } from '../schemas/auth';
 import bcrypt from 'bcryptjs';
 

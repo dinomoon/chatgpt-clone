@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
-import db from '../db';
+import db from '../../db';
 import { User } from '../types/db';
-import { usersTable } from '../db/schema';
+import { usersTable } from '../../db/schema';
 
 export const getUserByEmail = async (email: string): Promise<User | null> => {
   try {

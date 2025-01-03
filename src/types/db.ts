@@ -1,3 +1,3 @@
-import { usersTable } from '../db/schema';
+import { usersTable } from '../../db/schema';
 
 export type User = typeof usersTable.$inferSelect;

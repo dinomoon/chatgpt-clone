@@ -3,3 +3,8 @@ export interface SignUpFormError {
   email?: string[];
   password?: string[];
 }
+
+export interface SignInFormError {
+  email?: string[];
+  password?: string[];
+}

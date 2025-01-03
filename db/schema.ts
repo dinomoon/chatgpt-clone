@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const usersTable = pgTable('users_table', {
   id: uuid('id').primaryKey().defaultRandom().notNull(),
@@ -13,22 +13,22 @@ export const usersTable = pgTable('users_table', {
 export const conversationsTable = pgTable('conversations_table', {
   id: uuid('id').primaryKey().defaultRandom().notNull(),
   name: text('name'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
   userId: uuid('userId')
     .references(() => usersTable.id, { onDelete: 'cascade' })
     .notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const messagesTable = pgTable('messages_table', {
   id: uuid('id').primaryKey().defaultRandom().notNull(),
   content: text('content'),
   role: text('role').$type<'user' | 'assistant'>(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
   conversationId: uuid('conversationId')
     .references(() => conversationsTable.id, { onDelete: 'cascade' })
     .notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const userRelations = relations(usersTable, ({ many }) => ({

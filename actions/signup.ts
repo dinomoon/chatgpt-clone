@@ -42,5 +42,5 @@ export const signUp = async (_: any, formData: FormData) => {
     };
   }
 
-  redirect('/login');
+  redirect('/signin');
 };

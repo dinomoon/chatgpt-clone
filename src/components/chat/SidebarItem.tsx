@@ -10,6 +10,7 @@ import {
 import { Ellipsis, Pencil, Trash } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { useSheetStore } from '@/store/sheet';
 
 type Props = {
   item: {
@@ -24,6 +25,7 @@ export function SidebarItem({ item }: Props) {
   const { id, href, icon, label } = item;
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const updateOpen = useSheetStore((state) => state.updateOpen);
 
   const handleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -38,6 +40,8 @@ export function SidebarItem({ item }: Props) {
           ? 'text-white bg-white/10'
           : 'text-zinc-400'
       )}
+      scroll={false}
+      onClick={() => updateOpen(false)}
     >
       {/* label영역 */}
       <div className='flex items-center gap-2'>

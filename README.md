@@ -2,6 +2,7 @@
 
 - react 19, nextjs 15 앱라우터 맛보기
 - neon, drizzle
+- shadcn ui
 - serverAction
 - useActionState
 - useFormStatus
